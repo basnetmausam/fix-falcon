@@ -1,9 +1,14 @@
-import Link from 'next/link'
+'use client'
 
+import classNames from 'classnames'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { LuBug } from 'react-icons/lu'
+
 const NavBar = () => {
+  const currentPath = usePathname()
   const Links = [
-    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Dashboard', href: '/' },
     { label: 'Issues', href: '/issues' },
   ]
   return (
@@ -16,7 +21,11 @@ const NavBar = () => {
           <Link
             key={link.href}
             href={link.href}
-            className='text-zinc-500 hover:text-zinc-800 transition-colors'
+            className={classNames({
+              'text-zinc-900': currentPath == link.href,
+              'text-zinc-500': currentPath != link.href,
+              'hover:text-zinc-800 transition-colors': true,
+            })}
           >
             {link.label}
           </Link>
